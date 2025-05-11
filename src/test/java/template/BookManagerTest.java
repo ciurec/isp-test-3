@@ -3,7 +3,7 @@ package template;
 import junit.framework.TestCase;
 import org.junit.Test;
 
-public class CustomerManagerTest extends TestCase {
+public class BookManagerTest extends TestCase {
 
     @Test
     public void testCustomerManager() {

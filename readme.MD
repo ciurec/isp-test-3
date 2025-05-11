@@ -1,33 +1,63 @@
-# Starting from the provided template, implement a program that follows the specifications below:
+# Java Exam Task: Library Book Borrowing with Threads
 
-![Sample image](docs/sample.jpg)
+## Objective
+The goal is to create a library system that allows users to borrow books. The system should handle exceptions when books are unavailable and use multithreading to simulate multiple users borrowing books at the same time.
 
-[//]: # (- Create the classes described in the diagram,elements inside and represent relationships between them. &#40;4p&#41;)
+---
 
-[//]: # ()
-[//]: # (- Extend the program to not allow duplicate employees based on the employeeId. &#40;1p&#41;)
+## Classes Overview
 
-[//]: # ()
-[//]: # (- Use the predefined Set from EmployeeManger to store and manage employees, add three employees with id and salary, and assign a name to each. &#40;1p&#41;)
+### 1. `Book` Class
+This class represents a book in the library.
 
-[//]: # ()
-[//]: # (- Display all the employees names and salary. &#40;1p&#41;)
+- **Fields**:
+    - `title` (`String`): The title of the book.
+    - `author` (`String`): The name of the book's author.
+    - `copiesAvailable` (`int`): The number of copies available for borrowing.
 
-[//]: # ()
-[//]: # (- Implement a method to calculate the average salary of all employees and display the average. &#40;1p&#41;)
+- **Method**:
+    - `public synchronized void borrowBook() throws BookUnavailableException`:
+        - **Purpose**: Allows a user to borrow a book.
+        - **Behavior**:
+            - If `copiesAvailable` is `0`, throw a `BookUnavailableException`.
+            - Otherwise:
+                - Decrease `copiesAvailable` by 1.
+---
 
-[//]: # ()
-[//]: # (- Write unit tests to verify the correctness of the average salary calculation &#40;1p&#41;.)
+### 2. `BookUnavailableException` Class
+This is a custom exception class used to indicate that a book is unavailable for borrowing.
 
+---
+### 3. `BorrowThread` Class
+This class simulates a user trying to borrow a book. It extends the `Thread` class.
 
-- Create the classes described in the diagram,elements inside and represent relationships between them. (4p)
+- **Field**:
+    - `Book book`: A reference to the book that the thread will attempt to borrow.
 
-- Extend the program to not allow duplicate customers based on the customerId. (1p)
+- **Constructor**:
+    - `public BorrowThread(Book book)`:
+        - Initializes the thread with the book it will borrow.
 
-- Use the predefined Set from CustomerManager to store and manage customers, add three customers with id and totalSpending, and assign a name to each. (1p)
+- **Method**:
+    - Override the `run()` method:
+        - **Purpose**: Simulates the borrowing process.
+        - **Behavior**:
+            - Calls the `borrowBook()` method of the `Book` class inside a `try-catch` block.
+            - If a `BookUnavailableException` is thrown, catch it and print the exception message along with the thread's name.
 
-- Display all the customers names and totalSpending. (1p)
+---
+## Main Method Instructions
+1. **Create a `Book` instance**:
+    - Example:
+        - Title: `"Java Essentials"`
+        - Author: `"John Doe"`
+        - Copies available: `2`
 
-- Implement a method to find the customer with the maximum amount spent and display customerName. (1p)
+2. **Create and start `2` `BorrowThread` instances**:
+    - Pass the same `Book` instance to all threads.
+    - Start each thread to simulate multiple users trying to borrow the same book.
 
-- Write unit tests to verify the correctness of the search for the customer with the maximum amount spent . (1p)
+---
+
+## Thread Safety
+- The `borrowBook()` method in the `Book` class must be synchronized to ensure that only one thread can access it at a time. This prevents race conditions when multiple threads try to borrow the same book simultaneously.
