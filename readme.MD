@@ -1,4 +1,4 @@
-# Java Exam Task: Library Book Borrowing with Threads
+# Java Task: Library Book Borrowing with Threads
 
 ## Objective
 The goal is to create a library system that allows users to borrow books. The system should handle exceptions when books are unavailable and use multithreading to simulate multiple users borrowing books at the same time.
