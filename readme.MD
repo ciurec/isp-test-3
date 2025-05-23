@@ -1,42 +1,41 @@
-# Java Task: Ticket Booking System with Threads
+# Java Task: Car Renting System with Threads
 
-Simulate a **ticket booking system** where multiple users try to book concert tickets at the same time. Handle cases
-where tickets are sold out using a **custom exception**.
+Simulate a car renting system where multiple users try to rent cars at the same time. Handle cases where no cars are
+available using a custom exception.
 
 ---
 
 ## Section 1: Classes and Methods (5P)
 
-### `Event` Class (2p)
+### 1. `Renter` Class (2p)
 
-Represents an event with a limited number of tickets.
+Represents a Renter with a limited number of cars available for rent.
 
 ### **Fields**:
 
-- `eventId`: Unique identifier for the event.
-- `eventName`: The name of the event.
-- `ticketsAvailable`: Number of tickets remaining.
+- `renterId`: Unique identifier for the renter.
+- `renterName`: The name of the renter.
+- `carsAvailable`: Number of cars remaining to rent.
 
 ### **Method**:
 
-- `bookTicket()`: Decreases `ticketsAvailable` or throws `TicketsSoldOutException` if none are available.
+- `rentCar()`: Decreases `carsAvailable` by 1 or throws `CarUnavailableException` if none are available.
 
 ### **Use lombok for model class to reduce boilerplate code.** (1p)
 
-### `TicketsSoldOutException` Class (1p)
+### 2. `CarUnavailableException` Class (1p)
 
-### `BookingThread` Class (1p)
+### 3. `RentThread` Class (1p)
 
-- Simulates a user trying to book a ticket.
-- Display a message on the screen that Ticket was booked successfully and also remaining tickets at every iteration
-
----
+- Simulates a user trying to rent a car.
+- Display a message on the screen that the car was rented successfully, and also show the number of remaining cars at
+  each iteration
 
 ## Section 2: Implementation (4P)
 
-- Create a `Ticket` instance that contains 5 tickets. (1p)
-- Start 6 instances of `BookingThread` instances to simulate users trying to book tickets simultaneously. (1p)
-- Handle `TicketsSoldOutException` when no more tickets are available and display message in console. (1p)
-- Ensure that only one thread can book a ticket at a time using thread synchronization. (1p)
+- Create a `Renter` instance with 5 available cars. (1p)
+- Start 6 instances of `RentThread` to simulate users trying to rent simultaneously. (1p)
+- Handle `CarUnavailableException` when no more cars are available and display a message. (1p)
+- Ensure that only one thread can rent a car at a time using thread synchronization. (1p)
 
 ---
